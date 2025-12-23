@@ -11,6 +11,7 @@ class processesObserver:
                     with open(os.path.join('/proc', pid, 'status'), 'r') as f:
                         status_info = f.readlines()
                     mem_usage = 0
+                    process_name ="unknown"
                     for line in status_info:
                         if line.startswith('VmRSS:'):
                             process_name = status_info[0].split()[1]
@@ -64,7 +65,7 @@ class MemoryManagment:
     def sleep_process(pid: int):
         try:
             print(f"Process {pid} trying to sleep due to high memory usage.")
-            os.killpg(pid, signal.SIGSTOP)
+            os.kill(pid, signal.SIGSTOP)
         except Exception as e:
             print(f"Failed to put process {pid} to sleep: {e}, trying to kill the parent instead.")
     

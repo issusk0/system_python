@@ -9,14 +9,15 @@ def observe_processes():
 
 
 def auto_managment_memory():
+    mm = MemoryManagment()
     process_data = processesObserver.get_process_data()
     for process in process_data:
         name = process['name']
         pid = process['pid']
         memory_usage = process['memory_usage']
         if memory_usage > MemoryManagment.peak_memory_usage():
-            print(f"Process {pid} ({name}) is using {memory_usage} bytes, exceeding the peak limit. Killing it.")
-            MemoryManagment.killproccess(pid)
+            print(f"Process {pid} ({name}) is using {memory_usage} bytes, exceeding the peak limit.")
+            mm.sleep_process(pid)
 
 if __name__ == "__main__":
     manager = ThreadManager()
