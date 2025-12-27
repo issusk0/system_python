@@ -5,7 +5,7 @@ from pprint import pprint
 
 def observe_processes():
     process_data = processesObserver.get_process_data()
-    return pprint(process_data)
+    return print(process_data)
 
 
 def auto_managment_memory():
